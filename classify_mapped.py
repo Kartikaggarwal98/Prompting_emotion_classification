@@ -61,7 +61,6 @@ tidx = 0
 print (f'----------- {templates[tidx]} + {promptmode} + {model_checkpoint} -----------')
 
 for i in tqdm(range(len(dataset[mode]))):
-# for i in tqdm(range(10)):
     if promptmode=='pre':
         sent = templates[tidx] + dataset[mode][i]['text']+'.'
     else:
@@ -77,10 +76,11 @@ for i in tqdm(range(len(dataset[mode]))):
     
 pred_emos_mapped = [manual_emos_mapped_rev[i] for i in pred_emos]
 
-pd.DataFrame(zip(prompt_sents,true_emos,pred_emos,pred_emos_mapped), columns = ['prompt','true','pred','mapped']).to_csv('out.csv',index=None)
+pd.DataFrame(zip(prompt_sents,true_emos,pred_emos_mapped), columns = ['prompt','true','pred']).to_csv('out_post.csv',index=None)
 
 pred_emos_labelled = [reverse_emotions[manual_emos_mapped_rev[i]] for i in pred_emos]
 true_emos_labelled = [reverse_emotions[i] for i in true_emos]
 # print (true_emos_labelled, pred_emos_labelled)
 
 print (classification_report(true_emos_labelled, pred_emos_labelled, target_names=emotions))
+
