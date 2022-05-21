@@ -6,3 +6,4 @@ ipython_notebooks/*
 *.ipynb_checkpoints
 *.DS_Store
 *.pyc
+*.png

@@ -16,11 +16,13 @@ print (len(dataset['train']), len(dataset['validation']), len(dataset['test']))
 emotions=['sadness','joy','love','anger','fear','surprise']
 reverse_emotions = {emotions[i]:i for i in range(len(emotions))}
 
+model_checkpoint = ['bert-base-cased','bert-base-uncased','distilbert-base-cased','distilbert-base-uncased',
+                    'bert-large-uncased'][0]
+
 #fill mask pipeline directly gives the mask word
-unmasker = pipeline('fill-mask', model='bert-base-uncased', targets = emotions)
+unmasker = pipeline('fill-mask', model=model_checkpoint, targets = emotions)
 
 templates = ['i am feeling [MASK].',
-    'I am very [MASK].',
     '#[MASK]']
 
 true_emos, pred_emos, prompt_sents = [],[],[]
